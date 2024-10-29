@@ -1,13 +1,16 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
+const backendUrl = process.env.NODE_ENV === 'production' 
+  ? 'https://ecmrc.onrender.com'
+  : 'http://localhost:5000';
+
 export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api/": "http://localhost:5000",
-      "/uploads/": "http://localhost:5000",
+      "/api/": backendUrl,
+      "/uploads/": backendUrl,
     },
   },
 });
